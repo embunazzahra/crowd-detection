@@ -94,21 +94,21 @@ struct HumanDetectionInCameraFeed: View {
                             // alert desc container
                             VStack{
                                 ZStack{
-                                    Color.uiPink
+                                    (captureDelegate.peopleCount > 4 ? Color.uiPink : Color.lightgreen)
                                         .cornerRadius(15)
                                         .shadow(radius: 5)
                                     
                                     HStack{
-                                        Text("High crowd density detected!")
+                                        Text(captureDelegate.peopleCount > 4 ? "High crowd density detected!":"Not crowded")
                                             .font(.title3)
                                             .fontWeight(.bold)
-                                            .foregroundColor(Color.maroon)
+                                            .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
                                         
                                         Spacer()
                                         
-                                        Image(systemName: "bell.fill")
+                                        Image(systemName: captureDelegate.peopleCount > 4 ? "bell.fill" : "checkmark.circle.fill")
                                             .font(.title3)
-                                            .foregroundColor(Color.maroon)
+                                            .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
                                     }
                                     .padding(.horizontal, 30)
                                     
