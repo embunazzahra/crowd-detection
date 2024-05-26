@@ -52,12 +52,14 @@ struct ContentView: View {
                     .font(.title)
                     .padding()
             }
+            .background(Color(Color.darkGrey))
             .onAppear{
                 countPeople()
             }
         } else{
             HumanDetectionInCameraFeed()
         }
+        
         
     }
     
