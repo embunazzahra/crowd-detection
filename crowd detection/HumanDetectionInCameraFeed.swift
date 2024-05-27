@@ -34,8 +34,33 @@ struct HumanDetectionInCameraFeed: View {
                         
                         // camera container
                         VStack{
+                            
+                            HStack{
+                                VStack (alignment: .leading){
+                                    Text("Live Detection")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color.white)
+                                    Text("Car Number 5")
+                                        .font(.headline)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color.white)
+                                }
+                                
+                                Spacer()
+                                Image(systemName: "circle.fill")
+                                    .font(.custom("saas", fixedSize: 8))
+                                    .foregroundColor(.yellowcolor)
+                                Text("27 May (Today)")
+                                    .font(.headline)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(Color.white)
+                            }
+                            
+                            
                             ZStack {
                                 VideoPreviewView(session: captureSession)
+                                    .cornerRadius(22)
                                     .overlay(ForEach(captureDelegate.detectedRectangles.indices, id: \.self){ index in
                                         
                                         GeometryReader{ geometry in
@@ -59,7 +84,7 @@ struct HumanDetectionInCameraFeed: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
                 }
-                .frame(width: 750, height: 750)
+                .frame(width: 750, height: 800)
                 .padding(.horizontal,30)
                 
                 VStack {
@@ -144,12 +169,12 @@ struct HumanDetectionInCameraFeed: View {
 //                                                .cornerRadius(17)
 //                                                .shadow(radius: 5)
                                             
-                                            RoundedRectangle(cornerRadius: 17)
+                                            RoundedRectangle(cornerRadius: 15)
                                                                 .stroke(Color.yellowcolor, lineWidth: 2)
                                             
                                             Text("change car number")
                                                 .font(.title3)
-                                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                                .fontWeight(.medium)
                                                 .foregroundColor(.yellowcolor)
                                                 
                                         }
@@ -162,12 +187,12 @@ struct HumanDetectionInCameraFeed: View {
                                     VStack{
                                         ZStack{
                                             Color.lightPurple
-                                                .cornerRadius(17)
+                                                .cornerRadius(15)
                                                 .shadow(radius: 5)
                                             
-                                            Text("open dashboard")
+                                            Text("see dashboard")
                                                 .font(.title3)
-                                                .fontWeight(.bold)
+                                                .fontWeight(.medium)
                                         }
                                         
                                     }
@@ -224,23 +249,6 @@ struct HumanDetectionInCameraFeed: View {
                 .padding(.horizontal,30)
                 
                 
-                
-                
-                
-                
-                
-                
-                // Count container
-                //                Text("Human Detected: \(captureDelegate.peopleCount)")
-                //                    .font(.title)
-                //                    .padding()
-                //                    .foregroundColor(Color.white)
-                //                    .onAppear{
-                //                        setupCaptureSession()
-                //                    }
-                //                    .onDisappear{
-                //                        captureSession.stopRunning()
-                //                    }
             }
         }
     }

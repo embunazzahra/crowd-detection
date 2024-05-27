@@ -42,7 +42,7 @@ class CaptureDelegate : NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, 
             }
         }
         
-        request.upperBodyOnly = false
+        request.upperBodyOnly = true
         
         do {
             try VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
