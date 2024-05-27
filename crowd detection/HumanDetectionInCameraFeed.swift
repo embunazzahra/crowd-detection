@@ -62,88 +62,185 @@ struct HumanDetectionInCameraFeed: View {
                 .frame(width: 750, height: 750)
                 .padding(.horizontal,30)
                 
-                // alert container
-                VStack{
-                    ZStack{
-                        Color.grey
-                            .cornerRadius(22)
-                            .shadow(radius: 5)
+                VStack {
+                    HStack (alignment: .top){
                         
-                        // alert vstack
                         VStack{
-                            //alert and more
-                            HStack{
-                                Text("Alerts")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color.white)
-                                
-                                Spacer()
-                                
-                                Text("more")
-                                    .font(.title3)
-                                    .foregroundColor(Color.white)
-                                Image(systemName: "chevron.right")
-                                    .font(.title3)
-                                    .foregroundColor(.white)
-                                
-                                
-                            }
-//                            .padding(.horizontal)
-                            
-                            // alert desc container
+                            // alert container
                             VStack{
                                 ZStack{
-                                    (captureDelegate.peopleCount > 4 ? Color.uiPink : Color.lightgreen)
-                                        .cornerRadius(15)
+                                    Color.grey
+                                        .cornerRadius(22)
                                         .shadow(radius: 5)
                                     
-                                    HStack{
-                                        Text(captureDelegate.peopleCount > 4 ? "High crowd density detected!":"Not crowded")
-                                            .font(.title3)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
+                                    // alert vstack
+                                    VStack{
+                                        //alert and more
+                                        HStack{
+                                            Text("Alerts")
+                                                .font(.title2)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.white)
+                                            
+                                            Spacer()
+                                            
+                                            Text("more")
+                                                .font(.title3)
+                                                .foregroundColor(Color.white)
+                                            Image(systemName: "chevron.right")
+                                                .font(.title3)
+                                                .foregroundColor(.white)
+                                            
+                                            
+                                        }
+                                        //                            .padding(.horizontal)
                                         
-                                        Spacer()
+                                        // alert desc container
+                                        VStack{
+                                            ZStack{
+                                                (captureDelegate.peopleCount > 4 ? Color.uiPink : Color.lightgreen)
+                                                    .cornerRadius(15)
+                                                    .shadow(radius: 5)
+                                                
+                                                HStack{
+                                                    Text(captureDelegate.peopleCount > 4 ? "High crowd density detected!":"Not crowded")
+                                                        .font(.title3)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Image(systemName: captureDelegate.peopleCount > 4 ? "bell.fill" : "checkmark.circle.fill")
+                                                        .font(.title3)
+                                                        .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
+                                                }
+                                                .padding(.horizontal, 30)
+                                                
+                                                
+                                            }
+                                            
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: 50)
+                                        //                            .padding(.horizontal)
                                         
-                                        Image(systemName: captureDelegate.peopleCount > 4 ? "bell.fill" : "checkmark.circle.fill")
-                                            .font(.title3)
-                                            .foregroundColor(captureDelegate.peopleCount > 4 ? Color.maroon : Color.darkGreen)
+                                        
+                                    }.padding()
+                                    
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(.leading)
+                            }
+                            .frame(width: 500, height: 130)
+                            
+                            VStack{
+                                
+                                
+                                
+                                HStack{
+                                    VStack{
+                                        ZStack{
+//                                            Color.yellowcolor
+//                                                .cornerRadius(17)
+//                                                .shadow(radius: 5)
+                                            
+                                            RoundedRectangle(cornerRadius: 17)
+                                                                .stroke(Color.yellowcolor, lineWidth: 2)
+                                            
+                                            Text("change car number")
+                                                .font(.title3)
+                                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                                .foregroundColor(.yellowcolor)
+                                                
+                                        }
+                                        
                                     }
-                                    .padding(.horizontal, 30)
+                                    .padding(.trailing)
                                     
                                     
+                                    
+                                    VStack{
+                                        ZStack{
+                                            Color.lightPurple
+                                                .cornerRadius(17)
+                                                .shadow(radius: 5)
+                                            
+                                            Text("open dashboard")
+                                                .font(.title3)
+                                                .fontWeight(.bold)
+                                        }
+                                        
+                                    }
                                 }
                                 
                                 
+                                
+                                
+                                
                             }
-                            .frame(maxWidth: .infinity, maxHeight: 50)
-//                            .padding(.horizontal)
-                            
-                            
-                        }.padding()
+                            .padding(.leading)
+                            .padding(.top)
+                        }
                         
+                        
+                        
+                        
+                        
+                        // count container
+                        VStack{
+                            ZStack{
+                                Color.grey
+                                    .cornerRadius(22)
+                                    .shadow(radius: 5)
+                                
+                                
+                                //count contents
+                                VStack{
+                                    Text("Passenger Count")
+                                        .font(.title2)
+                                        .foregroundColor(.white)
+                                    
+                                    
+                                    Text("\(captureDelegate.peopleCount)")
+                                        .font(.custom("String", fixedSize: 70))
+                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                        .padding()
+                                        .foregroundColor(Color.white)
+                                        .onAppear{
+                                            setupCaptureSession()
+                                        }
+                                        .onDisappear{
+                                            captureSession.stopRunning()
+                                        }
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(.horizontal)
+                        }
+                        .frame(width:250, height: 200)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding()
                 }
-                .frame(width: 750, height: 150)
-//                .padding(30)
+                .frame(width: 750,height: 200)
+                .padding(.horizontal,30)
+                
+                
+                
+                
                 
                 
                 
                 
                 // Count container
-                Text("Human Detected: \(captureDelegate.peopleCount)")
-                    .font(.title)
-                    .padding()
-                    .foregroundColor(Color.white)
-                    .onAppear{
-                        setupCaptureSession()
-                    }
-                    .onDisappear{
-                        captureSession.stopRunning()
-                    }
+                //                Text("Human Detected: \(captureDelegate.peopleCount)")
+                //                    .font(.title)
+                //                    .padding()
+                //                    .foregroundColor(Color.white)
+                //                    .onAppear{
+                //                        setupCaptureSession()
+                //                    }
+                //                    .onDisappear{
+                //                        captureSession.stopRunning()
+                //                    }
             }
         }
     }
